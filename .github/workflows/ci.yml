@@ -13,13 +13,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
+      - uses: Azure/k8s-deploy@v1.4
         with:
-          output: results.sarif
-          format: sarif
-          # Adjust severity of non-security issues
-          gh-code-scanning-compat: true
-          # Force 0 exit code to allow SARIF file generation
-          # This will handover control about PR rejection to the GitHub side
-          max-allowed-issues: 2147483647
+          namespace: 'myapp'
+          manifests: |
+            deployment.yaml
+            service.yaml
+          images: 'contoso.azurecr.io/myapp:${{ event.run_id }}'
+          imagepullsecrets: |
+            image-pull-secret1
+            image-pull-secret2
+          kubectl-version: 'latest'
