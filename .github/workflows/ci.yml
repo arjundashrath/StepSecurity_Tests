@@ -13,5 +13,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - uses: icrawl/action-tsc@v1
+      - name: Docker Build
+        run: docker build –t myimage:0.1.
 
