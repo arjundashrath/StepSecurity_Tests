@@ -15,5 +15,7 @@ jobs:
           fetch-depth: 2
       - name: Docker Build
         run: docker build -t testimage:0.1 .
+      - name: List Img
+        run: docker image ls
 
 
