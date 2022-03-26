@@ -15,6 +15,5 @@ jobs:
           fetch-depth: 2
       - name: Docker Build
         run: docker build -t testimage:0.1 .
-      - name: Docker Build 2
-        run: docker build -t testimg:0.1 .
+
 
