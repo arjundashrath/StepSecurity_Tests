@@ -17,3 +17,4 @@ jobs:
         run: docker build -t testimage:0.1 .
       - name: List Img
         run: docker image ls
+        
