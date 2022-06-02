@@ -7,11 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@v1.0.7
+        uses: arjundashrath/get-mfa-secrets@v1.0.8
         with:
           secrets: |
-            secret1
-            secret2
+            xyzsecret1
+            abcsecret2
+            uvwsecret3
         id: test
       - name: Test Output 1
-        run: echo "The output is ${{ steps.test.secrets }}"
+        run: echo "The output is ${{ steps.test.output.xyzsecret1 }}"
+      - name: Test Output 2
+        run: echo "The output is ${{ steps.test.output.uvwsecret3 }}"
