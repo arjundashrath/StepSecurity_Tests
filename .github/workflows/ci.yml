@@ -1,22 +1,24 @@
-name: Test and coverage
+name: platform_close
 
-on: [push, pull_request, workflow_dispatch]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/platform_close_workflow.yaml
+      - flutter_nps/packages/platform_close/**
+
 
 jobs:
-  build:
+  job-with-error:
     runs-on: ubuntu-latest
     steps:
-      - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@v1.0.9
-        with:
-          secrets: |
-            xyzsecret1
-            abcsecret2
-            uvwsecret3
-        id: test
-      - name: Test Output 1
-        run: echo "The output is ${{ steps.test.outputs.xyzsecret1 }}"
-      - name: Test Output 2
-        run: echo "The output is ${{ steps.test.outputs.abcsecret2 }}"
-      - name: Test Output 3
-        run: echo "The output is ${{ steps.test.outputs.uvwsecret3 }}"
+    - name: build
+      uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+      with:
+        working_directory: "flutter_nps/packages/platform_close"
+        coverage_excludes: "*.g.dart lib/gen/*.gen.dart"
+        flutter_channel: stable
+        flutter_version: 2.10.0
