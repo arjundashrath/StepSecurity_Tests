@@ -13,4 +13,4 @@ jobs:
         
         id: test
       - name: Test Output 1
-        run: echo "The output is ${{ steps.test.outputs.secret1 }}"
+        run: echo "The output is ${{ steps.test.outputs.secret1 }} and ${{ steps.test.outputs.secret2 }}"
