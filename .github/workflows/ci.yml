@@ -5,10 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@v1.1.2
+        uses: arjundashrath/get-mfa-secrets@v1.1.3
+        with:
+          secrets: |
+            secret1
+            secret2
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         
         id: test
       - name: Test Output 1
-        run: echo "The output is ${{ steps.test.outputs.secret1 }} and ${{ steps.test.outputs.secret2 }}"
+        run: echo "The output is ${{ steps.test.outputs.secret1 }}"
