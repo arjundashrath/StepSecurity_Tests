@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@v1.1.5
+        uses: arjundashrath/get-mfa-secrets@v1.1.6
         with:
           secrets: |
             secret1
