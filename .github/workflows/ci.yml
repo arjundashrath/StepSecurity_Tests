@@ -4,15 +4,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@v1.1.6
-        with:
-          secrets: |
-            secret1
-            secret2
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Harden Runner
+        uses: arjundashrath/harden-runner@v0.0.1
         
-        id: test
-      - name: Test Output 1
-        run: echo "The output is ${{ steps.test.outputs.secret1 }}"
