@@ -12,8 +12,7 @@ jobs:
           secrets: |
             secret1
             secret2
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          timeout: "1"
         id: test
       - name: Test Output 1
         run: echo "The output is ${{ steps.test.outputs.secret1 }}"
