@@ -1,20 +1,17 @@
-name: Wait-for-secrets Demo
-on: workflow_dispatch
-
+name: Test and coverage
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
-    permissions:
-      id-token: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: step-security/get-mfa-secrets@v1.1.7
-        id: get-otp
+      - name: Secrets Test
+        uses: arjundashrath/get-mfa-secrets@v1.1.7
         with:
           secrets: |
-            DUMMY_SECRET: 
-              name: 'Dummy secret'
-              description: 'Dummy secret to demo wait-for-secrets'
-      - run: |
-          echo ${{ steps.get-otp.outputs.DUMMY_SECRET }}
-        
+            secret1
+            secret2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        id: test
+      - name: Test Output 1
+        run: echo "The output is ${{ steps.test.outputs.secret1 }}"
