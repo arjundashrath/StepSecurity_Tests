@@ -12,7 +12,7 @@ jobs:
           secrets: |
             secret1
             secret2
-          secrets-timeout: "1"
+          wait-timeout: "0.5"
         id: test
       - name: Test Output 1
         run: echo "The output is ${{ steps.test.outputs.secret1 }}"
