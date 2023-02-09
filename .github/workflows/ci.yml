@@ -1,18 +1,24 @@
-name: Test and coverage
-on: [push, pull_request, workflow_dispatch]
+name: CI
+#test
+on:
+  push:
+    branches:
+      - main
+    
+permissions: 
+  contents: read
+
 jobs:
-  build:
-    permissions:
-      id-token: write
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Secrets Test
-        uses: arjundashrath/get-mfa-secrets@373f4b36a63980989facdf1265098dc6563a469d
-        with:
-          secrets: |
-            secret1
-            secret2
-          wait-timeout: "0.5"
-        id: test
-      - name: Test Output 1
-        run: echo "The output is ${{ steps.test.outputs.secret1 }}"
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: 0
+    - name: Harden Runner
+      uses: step-security/harden-runner@int
+      with:
+        egress-policy: block
+        allowed-endpoints: >
+          github.com:443
+    - run: curl https://www.stepsecurity.io/
