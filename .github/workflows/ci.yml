@@ -22,4 +22,4 @@ jobs:
         allowed-endpoints: >
           github.com:443
 
-    - run: curl 172.217.6.196
+    - run: curl www.google.com
